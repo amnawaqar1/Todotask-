@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+
+   import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
 
 import GoogleAuth from "./googleauth";
 import DashBoard from "./Dashboard";
-const a = "dddd";
-//    var a = this.auth.currentUser().get().getId();
 
 class Header extends Component {
   componentDidMount() {
@@ -43,11 +42,15 @@ class Header extends Component {
 
   renderAuthButton() {
     if (this.props.isSignedIn) {
-      var a = window.gapi.auth2.getAuthInstance().currentUser.get().getId();
+      var a = window.gapi.auth2
+        .getAuthInstance()
+        .currentUser.get()
+        .getBasicProfile()
+        .getEmail();
 
       return (
         <div>
-          <DashBoard Data={a} />
+          <DashBoard Data1={a} />
         </div>
       );
     }
