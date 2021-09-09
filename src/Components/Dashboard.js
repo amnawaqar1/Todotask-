@@ -5,16 +5,20 @@ import axios from "axios";
 import Archieve from "./archieve";
 import Card from "./card";
 import Trash from "./trash";
-import Viewtask from "./viewtask";
 import Search from "./search";
 const DashBoard = ({ Data1 }) => {
-  const [Data, Setdata] = useState([]);
+  const [Daa, SetDaa] = useState([]);
+
   useEffect(() => {
     axios.get("http://localhost:3002/user").then((response) => {
-      Setdata(response.data);
+      SetDaa(response.data);
     });
   }, []);
-
+  let Data = Daa.filter((curElem) => {
+    if (curElem.aid === Data1) {
+      return curElem;
+    }
+  });
   return (
     <div>
       <Router>
@@ -38,7 +42,7 @@ const DashBoard = ({ Data1 }) => {
         <Switch>
           <Route path="/add" exact>
             {" "}
-            <Card Data={Data} />
+            <Card Data={Data1} />
           </Route>
           <Route path="/search" exact>
             {" "}
@@ -58,3 +62,4 @@ const DashBoard = ({ Data1 }) => {
   );
 };
 export default DashBoard;
+
